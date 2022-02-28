@@ -4,7 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/mayonaise/source/repos/MsPacMan/Content/mspacman_spritesheet.png</File>
+    <File>C:/Users/mayonaise/source/repos/monomspac/Content/mspacman_spritesheet.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yJmXHSEFCglGGgV7iX/xjyO3uqnuGqSR9sUtV/vgnVKROV5Pdb687jLdoG4QBd3WfNNLUJuuWJi9qL9GxxxnUw==",
+  "dgSpecHash": "BI+grq8ms/V4aJ8WzD/HR+ot1Y73QThVcr/rcG/3G+nibs4gp8YK4T1lZIWFdKhVS+4vhj24w16POlzGuga73w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mayonaise\\source\\repos\\MsPacMan\\MsPacMan.csproj",
+  "projectFilePath": "C:\\Users\\mayonaise\\source\\repos\\monomspac\\MsPacMan.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mayonaise\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\mayonaise\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
