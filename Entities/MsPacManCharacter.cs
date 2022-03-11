@@ -9,10 +9,10 @@ namespace MsPacMan.Entities
 {
     public class MsPacManCharacter : IGameEntity
     {
-        private const int MSPACMAN_DEFAULT_SPRITE_POS_X = 627;
-        private const int MSPACMAN_DEFAULT_SPRITE_POS_Y = 32;
-        private const int MSPACMAN_DEFAULT_SPRITE_WIDTH = 16;
-        private const int MSPACMAN_DEFAULT_SPRITE_HEIGHT = 16;
+        public int MSPACMAN_SPRITE_POS_X = 627;
+        public int MSPACMAN_SPRITE_POS_Y = 32;
+        public const int MSPACMAN_SPRITE_WIDTH = 16;
+        public const int MSPACMAN_SPRITE_HEIGHT = 16;
         public Sprite Sprite { get; private set; }
         public MsPacManState State { get; private set; }
         public Vector2 Position { get; set; }
@@ -20,7 +20,7 @@ namespace MsPacMan.Entities
         public float Speed { get; private set; }
         public MsPacManCharacter(Texture2D spriteSheet, Vector2 position)
         {
-            Sprite = new Sprite(spriteSheet, MSPACMAN_DEFAULT_SPRITE_POS_X, MSPACMAN_DEFAULT_SPRITE_POS_Y, MSPACMAN_DEFAULT_SPRITE_WIDTH, MSPACMAN_DEFAULT_SPRITE_HEIGHT);
+            Sprite = new Sprite(spriteSheet, MSPACMAN_SPRITE_POS_X, MSPACMAN_SPRITE_POS_Y, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
             Position = position;
         }
 

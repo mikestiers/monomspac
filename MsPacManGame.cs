@@ -12,8 +12,15 @@ namespace MsPacMan
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        public const int WINDOW_WIDTH = 172;
+        public const int WINDOW_HEIGHT = 225;
+
+        public const int MSPACMAN_START_POSITION_X = 82;
+        public const int MSPACMAN_START_POSITION_Y = 170;
+
         private Texture2D _spriteSheetTexture;
         private MsPacManCharacter _mspacman;
+        private Map _map;
 
         public MsPacManGame()
         {
@@ -27,6 +34,10 @@ namespace MsPacMan
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            _graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            _graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
@@ -34,8 +45,8 @@ namespace MsPacMan
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _spriteSheetTexture = Content.Load<Texture2D>(ASSET_NAME_SPRITESHEET);
-            _mspacman = new MsPacManCharacter(_spriteSheetTexture, new Vector2(20, 20));
-
+            _mspacman = new MsPacManCharacter(_spriteSheetTexture, new Vector2(MSPACMAN_START_POSITION_X, MSPACMAN_START_POSITION_Y));
+            _map = new Map(_spriteSheetTexture, new Vector2(0, 0));
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,6 +66,7 @@ namespace MsPacMan
             _spriteBatch.Begin();
 
             //Sprite mspacmanSprite = new Sprite(_spriteSheetTexture, 0, 0, 16, 16);
+            _map.Draw(_spriteBatch, gameTime);
             _mspacman.Draw(_spriteBatch, gameTime);
 
             //Sprite mspacmanSprite = new Sprite(_spriteSheetTexture, 0, 0, 16, 16);
