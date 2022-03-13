@@ -15,8 +15,8 @@ namespace MsPacMan
         public const int WINDOW_WIDTH = 172;
         public const int WINDOW_HEIGHT = 225;
 
-        public const int MSPACMAN_START_POSITION_X = 82;
-        public const int MSPACMAN_START_POSITION_Y = 170;
+        public const int MSPACMAN_START_POSITION_X = 78;
+        public const int MSPACMAN_START_POSITION_Y = 166;
 
         private Texture2D _spriteSheetTexture;
         private MsPacManCharacter _mspacman;
@@ -57,6 +57,7 @@ namespace MsPacMan
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+            _mspacman.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
