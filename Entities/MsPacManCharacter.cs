@@ -9,10 +9,10 @@ namespace MsPacMan.Entities
 {
     public class MsPacManCharacter : IGameEntity
     {
-        private const int MSPACMAN_IDLE_SPRITE_POS_X = 627;
-        private const int MSPACMAN_IDLE_SPRITE_POS_Y = 48;
-        public int MSPACMAN_SPRITE_POS_X = 627;
-        public int MSPACMAN_SPRITE_POS_Y = 32;
+        private const int MSPACMAN_IDLE_SPRITE_POS_X = 628;
+        private const int MSPACMAN_IDLE_SPRITE_POS_Y = 47;
+        public int MSPACMAN_SPRITE_POS_X = 628;
+        public int MSPACMAN_SPRITE_POS_Y = 33;
         public const int MSPACMAN_SPRITE_WIDTH = 16;
         public const int MSPACMAN_SPRITE_HEIGHT = 16;
         private const float BLINK_ANIMATION_RANDOM_MIN = 3f;
@@ -36,8 +36,8 @@ namespace MsPacMan.Entities
             _random = new Random();
 
             _mspacmanMouthClosedSprite = new Sprite(spriteSheet, MSPACMAN_SPRITE_POS_X, MSPACMAN_SPRITE_POS_Y, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
-            _mspacmanMouthHalfOpenedSprite = new Sprite(spriteSheet, MSPACMAN_SPRITE_POS_X + MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_POS_Y, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
-            _mspacmanMouthFullyOpenedSprite = new Sprite(spriteSheet, MSPACMAN_SPRITE_POS_X + (MSPACMAN_SPRITE_WIDTH * 2), MSPACMAN_SPRITE_POS_Y, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
+            _mspacmanMouthHalfOpenedSprite = new Sprite(spriteSheet, 645, 33, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
+            _mspacmanMouthFullyOpenedSprite = new Sprite(spriteSheet, 662, 33, MSPACMAN_SPRITE_WIDTH, MSPACMAN_SPRITE_HEIGHT);
 
             CreateChewAnimation();
             _mspacmanChewAnimation.Play();

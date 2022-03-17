@@ -15,7 +15,7 @@ namespace MsPacMan
         public const int WINDOW_WIDTH = 172;
         public const int WINDOW_HEIGHT = 225;
 
-        public const int MSPACMAN_START_POSITION_X = 78;
+        public const int MSPACMAN_START_POSITION_X = 77;
         public const int MSPACMAN_START_POSITION_Y = 166;
 
         private Texture2D _spriteSheetTexture;

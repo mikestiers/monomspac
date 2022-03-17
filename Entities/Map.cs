@@ -9,9 +9,9 @@ namespace MsPacMan.Entities
 {
     public class Map : IGameEntity
     {
-        public int MAP_SPRITE_POS_X = 0;
-        public int MAP_SPRITE_POS_Y = 0;
-        public int MAP_SPRITE_WIDTH = 172;
+        public int MAP_SPRITE_POS_X = 2;
+        public int MAP_SPRITE_POS_Y = 2;
+        public int MAP_SPRITE_WIDTH = 170;
         public int MAP_SPRITE_HEIGHT = 225;
 
         public Sprite Sprite { get; private set; }
