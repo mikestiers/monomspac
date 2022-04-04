@@ -9,6 +9,7 @@ namespace MsPacMan.Entities
 {
     public class MsPacManCharacter : IGameEntity
     {
+        private const float MSPACMAN_VELOCITY = -30f;
         private const int MSPACMAN_IDLE_SPRITE_POS_X = 628;
         private const int MSPACMAN_IDLE_SPRITE_POS_Y = 47;
         public int MSPACMAN_SPRITE_POS_X = 628;
@@ -24,6 +25,7 @@ namespace MsPacMan.Entities
         private Sprite _mspacmanMouthFullyOpenedSprite;
         private SpriteAnimation _mspacmanChewAnimation;
         private Random _random;
+        private float _mspacmanVelocity;
         public MsPacManState State { get; private set; }
         public Vector2 Position { get; set; }
         public bool IsAlive { get; private set; }
@@ -52,6 +54,11 @@ namespace MsPacMan.Entities
                 _idleBackgroundSprite.Draw(spriteBatch, this.Position);
                 _mspacmanChewAnimation.Draw(spriteBatch, Position);
             }
+            else if (State == MsPacManState.Moving)
+            {
+                _idleBackgroundSprite.Draw(spriteBatch, this.Position);
+                _mspacmanChewAnimation.Draw(spriteBatch, Position);
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -66,6 +73,11 @@ namespace MsPacMan.Entities
 
                 _mspacmanChewAnimation.Update(gameTime);
             }
+            else if (State == MsPacManState.Moving)
+            {
+                Position = new Vector2(Position.X, Position.Y + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                //State = MsPacManState.Idle;
+            }
         }
 
         private void CreateChewAnimation()
@@ -75,12 +87,29 @@ namespace MsPacMan.Entities
             _mspacmanChewAnimation.ShouldLoop = true;
 
             double blinkTimeStamp = BLINK_ANIMATION_RANDOM_MIN + _random.NextDouble() * (BLINK_ANIMATION_RANDOM_MAX - BLINK_ANIMATION_RANDOM_MIN);
-            
+
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthClosedSprite, 0);
             //_mspacmanChewAnimation.AddFrame(_mspacmanMouthHalfOpenedSprite, (float)blinkTimeStamp);
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthHalfOpenedSprite, 0.3f);
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthFullyOpenedSprite, 0.6f);
             //_mspacmanChewAnimation.AddFrame(_mspacmanMouthClosedSprite, (float)blinkTimeStamp + BLINK_ANIMATION_MOUTH_CLOSED_TIME); // dummy key frame to reset animation
         }
+
+        public bool BeginMove()
+        {
+            //if (State == MsPacManState.Moving || State == MsPacManState.Idle)
+            //    return false;
+
+            State = MsPacManState.Moving;
+            _mspacmanVelocity = MSPACMAN_VELOCITY;
+            return true;
+        }
+        public bool StopMoving()
+        {
+            State = MsPacManState.Idle;
+            _mspacmanVelocity = 0;
+            return true;
+        }
+            
     }
 }

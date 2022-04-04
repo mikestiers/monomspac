@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MsPacMan.Entities;
 using MsPacMan.Graphics;
+using MsPacMan.System;
 
 namespace MsPacMan
 {
@@ -21,6 +22,8 @@ namespace MsPacMan
         private Texture2D _spriteSheetTexture;
         private MsPacManCharacter _mspacman;
         private Map _map;
+
+        private InputController _inputController;
 
         public MsPacManGame()
         {
@@ -46,6 +49,7 @@ namespace MsPacMan
 
             _spriteSheetTexture = Content.Load<Texture2D>(ASSET_NAME_SPRITESHEET);
             _mspacman = new MsPacManCharacter(_spriteSheetTexture, new Vector2(MSPACMAN_START_POSITION_X, MSPACMAN_START_POSITION_Y));
+            _inputController = new InputController(_mspacman);
             _map = new Map(_spriteSheetTexture, new Vector2(0, 0));
         }
 
@@ -57,6 +61,7 @@ namespace MsPacMan
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+            _inputController.ProcessControls(gameTime);
             _mspacman.Update(gameTime);
         }
 
