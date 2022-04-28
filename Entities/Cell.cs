@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DictionaryPOC
+namespace MsPacMan.Entities
 {
-    class Cell
+    public class Cell
     {
         public Cell(int x, int y, bool isDot, bool visited)
         {

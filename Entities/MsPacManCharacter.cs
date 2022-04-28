@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using MsPacMan.Graphics;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace MsPacMan.Entities
@@ -76,6 +78,52 @@ namespace MsPacMan.Entities
             else if (State == MsPacManState.Moving)
             {
                 Position = new Vector2(Position.X, Position.Y + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                Debug.WriteLine("X: " + Position.X);
+                Debug.WriteLine("Y: " + Position.Y);
+
+                Dictionary<int, Cell> cells = new Dictionary<int, Cell>();
+                Cell cell_00 = new Cell(0, 0, false, false);
+                Cell cell_01 = new Cell(12, 0, false, false);
+                Cell cell_02 = new Cell(24, 0, false, false);
+                Cell cell_03 = new Cell(36, 0, false, false);
+                Cell cell_04 = new Cell(48, 0, false, false);
+                Cell cell_05 = new Cell(60, 0, false, false);
+                Cell cell_06 = new Cell(72, 0, false, false);
+                Cell cell_07 = new Cell(84, 0, false, false);
+                Cell cell_08 = new Cell(96, 0, false, false);
+                Cell cell_09 = new Cell(108, 0, false, false);
+                Cell cell_010 = new Cell(120, 0, true, true);
+                Cell cell_011 = new Cell(132, 0, false, false);
+                Cell cell_012 = new Cell(144, 0, false, false);
+                Cell cell_013 = new Cell(156, 0, false, false);
+                Cell cell_014 = new Cell(168, 0, false, false);
+                Cell cell_015 = new Cell(180, 0, false, false);
+                Cell cell_016 = new Cell(192, 0, false, false);
+                Cell cell_017 = new Cell(204, 0, false, false);
+                Cell cell_018 = new Cell(216, 0, false, false);
+                Cell cell_019 = new Cell(228, 0, false, false);
+                Cell cell_020 = new Cell(240, 0, false, false);
+
+                Dictionary<int, int> block = new Dictionary<int, int>();
+                block.Add(0, 0);
+                block.Add(12, 0);
+                block.Add(24, 0);
+                block.Add(77, 160);
+
+                if (block.ContainsKey((int)Position.X) && block.ContainsValue((int)Position.Y))
+                {
+                    Debug.WriteLine(block.ContainsKey((int)Position.X));
+                }
+
+                if (cells.ContainsKey((int)Position.Y))
+                {
+                    Debug.WriteLine(cells[(int)Position.Y]);
+                }
+                if ((int)Position.Y <= 12)
+                {
+                    Debug.WriteLine("hit 0");
+                    State = MsPacManState.Idle;
+                }
                 //State = MsPacManState.Idle;
             }
         }
