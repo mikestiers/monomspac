@@ -34,8 +34,6 @@ namespace MsPacMan
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
 
             _graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
@@ -58,8 +56,6 @@ namespace MsPacMan
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
             _inputController.ProcessControls(gameTime);
             _mspacman.Update(gameTime);
@@ -71,13 +67,9 @@ namespace MsPacMan
 
             _spriteBatch.Begin();
 
-            //Sprite mspacmanSprite = new Sprite(_spriteSheetTexture, 0, 0, 16, 16);
             _map.Draw(_spriteBatch, gameTime);
             _mspacman.Draw(_spriteBatch, gameTime);
 
-            //Sprite mspacmanSprite = new Sprite(_spriteSheetTexture, 0, 0, 16, 16);
-            //mspacmanSprite.Draw(_spriteBatch, new Vector2(20, 20));
-   
             _spriteBatch.End();
 
             base.Draw(gameTime);

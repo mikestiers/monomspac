@@ -8,6 +8,10 @@ namespace MsPacMan.Entities
     {
         Idle,
         Moving,
+        MovingUp,
+        MovingDown,
+        MovingLeft,
+        MovingRight,
         Dying,
     }
 }

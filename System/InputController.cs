@@ -22,12 +22,33 @@ namespace MsPacMan.System
             KeyboardState keyboardState = Keyboard.GetState();
             if (!_previousKeyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Up))
             {
-                if (_mspacman.State != MsPacManState.Moving)
+                if (_mspacman.State != MsPacManState.MovingUp)
                 {
-                    _mspacman.BeginMove();
+                    _mspacman.MoveUp();
                 }
             }
-            if (keyboardState.IsKeyUp(Keys.Up))
+            else if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                if (_mspacman.State != MsPacManState.MovingDown)
+                {
+                    _mspacman.MoveDown();
+                }
+            }
+            else if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                if (_mspacman.State != MsPacManState.MovingLeft)
+                {
+                    _mspacman.MoveLeft();
+                }
+            }
+            else if (keyboardState.IsKeyDown(Keys.Right))
+            {
+                if (_mspacman.State != MsPacManState.MovingRight)
+                {
+                    _mspacman.MoveRight();
+                }
+            }
+            else if (keyboardState.IsKeyUp(Keys.Up))
             {
                 _mspacman.StopMoving();
             }

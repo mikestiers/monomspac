@@ -5,13 +5,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace MsPacMan.Entities
 {
     public class MsPacManCharacter : IGameEntity
     {
-        private const float MSPACMAN_VELOCITY = -30f;
+        private const float MSPACMAN_VELOCITY_UP = -30f;
+        private const float MSPACMAN_VELOCITY_DOWN = 30f;
+        private const float MSPACMAN_VELOCITY_LEFT = -30f;
+        private const float MSPACMAN_VELOCITY_RIGHT = 30f;
         private const int MSPACMAN_IDLE_SPRITE_POS_X = 628;
         private const int MSPACMAN_IDLE_SPRITE_POS_Y = 47;
         public int MSPACMAN_SPRITE_POS_X = 628;
@@ -56,7 +60,7 @@ namespace MsPacMan.Entities
                 _idleBackgroundSprite.Draw(spriteBatch, this.Position);
                 _mspacmanChewAnimation.Draw(spriteBatch, Position);
             }
-            else if (State == MsPacManState.Moving)
+            else if (State != MsPacManState.Idle)
             {
                 _idleBackgroundSprite.Draw(spriteBatch, this.Position);
                 _mspacmanChewAnimation.Draw(spriteBatch, Position);
@@ -75,9 +79,28 @@ namespace MsPacMan.Entities
 
                 _mspacmanChewAnimation.Update(gameTime);
             }
-            else if (State == MsPacManState.Moving)
+            else if (State == MsPacManState.MovingUp)
             {
                 Position = new Vector2(Position.X, Position.Y + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                _mspacmanChewAnimation.Update(gameTime);
+            }
+            else if (State == MsPacManState.MovingDown)
+            {
+                Position = new Vector2(Position.X, Position.Y + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
+                _mspacmanChewAnimation.Update(gameTime);
+            }
+            else if (State == MsPacManState.MovingLeft)
+            {
+                Position = new Vector2(Position.X + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds, Position.Y);
+                _mspacmanChewAnimation.Update(gameTime);
+            }
+            else if (State == MsPacManState.MovingRight)
+            {
+                Position = new Vector2(Position.X + _mspacmanVelocity * (float)gameTime.ElapsedGameTime.TotalSeconds, Position.Y);
+                _mspacmanChewAnimation.Update(gameTime);
+            }
+            if (State != MsPacManState.MovingUp)
+            {
                 Debug.WriteLine("X: " + Position.X);
                 Debug.WriteLine("Y: " + Position.Y);
 
@@ -104,6 +127,37 @@ namespace MsPacMan.Entities
                 Cell cell_019 = new Cell(228, 0, false, false);
                 Cell cell_020 = new Cell(240, 0, false, false);
 
+                cells.Add(00, cell_00);
+                cells.Add(01, cell_01);
+                cells.Add(02, cell_02);
+                cells.Add(03, cell_03);
+                cells.Add(04, cell_04);
+                cells.Add(05, cell_05);
+                cells.Add(06, cell_06);
+                cells.Add(07, cell_07);
+                cells.Add(08, cell_08);
+                cells.Add(09, cell_09);
+                cells.Add(10, cell_010);
+                cells.Add(11, cell_011);
+                cells.Add(12, cell_012);
+                cells.Add(13, cell_013);
+                cells.Add(14, cell_014);
+                cells.Add(15, cell_015);
+                cells.Add(16, cell_016);
+                cells.Add(17, cell_017);
+                cells.Add(18, cell_018);
+                cells.Add(19, cell_019);
+                cells.Add(20, cell_020);
+
+                var currentLocationX = cells.Select(Item => Item.Value.x == (int)Position.X);
+                var currentLocationY = cells.Select(Item => Item.Value.y == (int)Position.Y);
+                Debug.WriteLine("sup " + currentLocationY.First());
+
+                if (currentLocationY.First())
+                {
+                    Debug.WriteLine("currentLocationY: " + currentLocationY.First());
+                }
+
                 Dictionary<int, int> block = new Dictionary<int, int>();
                 block.Add(0, 0);
                 block.Add(12, 0);
@@ -124,7 +178,6 @@ namespace MsPacMan.Entities
                     Debug.WriteLine("hit 0");
                     State = MsPacManState.Idle;
                 }
-                //State = MsPacManState.Idle;
             }
         }
 
@@ -137,21 +190,35 @@ namespace MsPacMan.Entities
             double blinkTimeStamp = BLINK_ANIMATION_RANDOM_MIN + _random.NextDouble() * (BLINK_ANIMATION_RANDOM_MAX - BLINK_ANIMATION_RANDOM_MIN);
 
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthClosedSprite, 0);
-            //_mspacmanChewAnimation.AddFrame(_mspacmanMouthHalfOpenedSprite, (float)blinkTimeStamp);
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthHalfOpenedSprite, 0.3f);
             _mspacmanChewAnimation.AddFrame(_mspacmanMouthFullyOpenedSprite, 0.6f);
-            //_mspacmanChewAnimation.AddFrame(_mspacmanMouthClosedSprite, (float)blinkTimeStamp + BLINK_ANIMATION_MOUTH_CLOSED_TIME); // dummy key frame to reset animation
         }
 
-        public bool BeginMove()
+        public bool MoveUp()
         {
-            //if (State == MsPacManState.Moving || State == MsPacManState.Idle)
-            //    return false;
-
-            State = MsPacManState.Moving;
-            _mspacmanVelocity = MSPACMAN_VELOCITY;
+            State = MsPacManState.MovingUp;
+            _mspacmanVelocity = MSPACMAN_VELOCITY_UP;
             return true;
         }
+        public bool MoveDown()
+        {
+            State = MsPacManState.MovingDown;
+            _mspacmanVelocity = MSPACMAN_VELOCITY_DOWN;
+            return true;
+        }
+        public bool MoveLeft()
+        {
+            State = MsPacManState.MovingLeft;
+            _mspacmanVelocity = MSPACMAN_VELOCITY_LEFT;
+            return true;
+        }
+        public bool MoveRight()
+        {
+            State = MsPacManState.MovingRight;
+            _mspacmanVelocity = MSPACMAN_VELOCITY_RIGHT;
+            return true;
+        }
+
         public bool StopMoving()
         {
             State = MsPacManState.Idle;
